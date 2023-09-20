@@ -1,0 +1,10 @@
+//twee methodes om een value van een key in een object op te halen
+const object1 = {key1: "1", key2: "2"};
+
+object1.key1; 
+//of
+object1["key1"]; //gebruiken als er een spatie in je key zit, of als je dynamisch keys wil ophalen
+
+const students = [{name: "Julie", lastname: "Boone"}, {name: "Lukas", lastname: "De Backer"}];
+
+students.map((cv) => {cv.name, cv.lastname}); 
