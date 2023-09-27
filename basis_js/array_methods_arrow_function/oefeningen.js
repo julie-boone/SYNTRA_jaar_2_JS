@@ -138,25 +138,25 @@ console.log(ageSorted);
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-const nodeList = document.querySelectorAll("div.mw-category-group li a");
+// const nodeList = document.querySelectorAll("div.mw-category-group li a");
 
-const array = Array.from(nodeList);
+// const array = Array.from(nodeList);
 
-const boulevardAvecDe = array
-  .map((cv) => {
-    return cv.title;
-  })
-  .filter((cv) => {
-    return cv.includes("de");
-  });
+// const boulevardAvecDe = array
+//   .map((cv) => {
+//     return cv.title;
+//   })
+//   .filter((cv) => {
+//     return cv.includes("de");
+//   });
 
-console.log(boulevardAvecDe);
+// console.log(boulevardAvecDe);
 
 //hetzelfde op één regel, met een implicit return function
 
-const boulevardsAvecDe = array
-  .map((cv) => cv.title)
-  .filter((cv) => cv.includes("de"));
+// const boulevardsAvecDe = array
+//   .map((cv) => cv.title)
+//   .filter((cv) => cv.includes("de"));
 
 // Sort the people alphabetically by last name
 
@@ -206,3 +206,43 @@ const comments = [
 // Array.prototype.findIndex()
 // Find the comment with this ID
 // delete the comment with the ID of 823423
+
+//Use the .sort method without taking articles into account:
+const bands = [
+  "The Plot in You",
+  "The Devil Wears Prada",
+  "Pierce the Veil",
+  "Norma Jean",
+  "The Bled",
+  "Say Anything",
+  "The Midway State",
+  "We Came as Romans",
+  "Counterparts",
+  "Oh, Sleeper",
+  "A Skylit Drive",
+  "Anywhere But Here",
+  "An Old Dog",
+];
+
+const sortedBands = bands
+  .map((cv) => {
+    let filmWithoutArticle;
+    filmWithoutArticle = cv
+      .replace(/The /i, "")
+      .replace(/An /i, "")
+      .replace(/A /i, "");
+    return filmWithoutArticle;
+  })
+  .sort((a, b) => {
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    if ((a = b)) {
+      return 0;
+    }
+  });
+
+console.log(sortedBands);

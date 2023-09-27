@@ -23,7 +23,7 @@ console.log(array2);
 
 // filter
 //gaat ook een nieuwe array returnen, maar met de gefilterde waarde
-//moet een boolean returnen, op basis waarvan hij eruit gefilterd wordt of in de nieuwe array komt
+//moet een boolean returnen op basis van een condition, waardoor hij eruit gefilterd wordt of in de nieuwe array komt
 
 const array3 = array1.filter((cv) => {
   return cv <= 2;
@@ -52,14 +52,40 @@ const sortedArray = array5.sort((a, b) => {
 });
 
 //reduce
-//array.reduce(functie, initial value)
-//geeft één waarde terug
+//array.reduce(functie, initial value) --> verwacht dus als enige twee parameters
+//initial value kan alles zijn: array, boolean, object, string ...
+//geeft één element terug
 
 array1.reduce((acc, cv) => {
   //acc is accumulator, wordt bijna altijd zo genoemd
   acc += cv;
   return acc;
 }, 0); //op het einde staat de startwaarde of accumulator
+
+//nog een voorbeeld
+const students = ["Lukas", "Joren", "Julie", "Pieter", "Diva"];
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+const studentsWithAge = students.reduce((acc, cv) => {
+  const age = getRandomInt(20, 50);
+  acc[cv] = age;
+  return acc;
+}, {});
+
+console.log(studentsWithAge);
+
+const uitkomst = {
+  Lukas: 26,
+  Joren: 44,
+  Julie: 33,
+  Pieter: 3,
+  Diva: 22,
+};
 
 //arrow functions, gaat sneller maar kan je niet hergebruiken
 function add2(a) {
