@@ -54,7 +54,7 @@ const sortedArray = array5.sort((a, b) => {
 //reduce
 //array.reduce(functie, initial value) --> verwacht dus als enige twee parameters
 //initial value kan alles zijn: array, boolean, object, string ...
-//geeft één element terug
+//gaat van een array naar eender welke andere waarde
 
 array1.reduce((acc, cv) => {
   //acc is accumulator, wordt bijna altijd zo genoemd
