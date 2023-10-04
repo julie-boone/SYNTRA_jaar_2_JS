@@ -68,7 +68,7 @@ const filteredInventors = inventors.filter((inventor) => {
   return inventor.year < 1600 && inventor.year >= 1500;
 });
 
-console.log(filteredInventors);
+// console.log(filteredInventors);
 
 // 2. Give us an array of the inventors first and last names
 
@@ -76,7 +76,7 @@ const firstAndLast = inventors.map((inventor) => {
   return `${inventor.first}, ${inventor.last}`; //handigst met template literals
 });
 
-console.log(firstAndLast);
+// console.log(firstAndLast);
 
 // 3. Sort the inventors by birthdate, oldest to youngest
 
@@ -92,7 +92,7 @@ const inventorsSorted = inventors.sort((a, b) => {
   }
 });
 
-console.log(inventorsSorted);
+// console.log(inventorsSorted);
 
 // 4. How many years did all the inventors live all together?
 
@@ -101,7 +101,7 @@ inventors.forEach((inventor) => {
   totalAge += inventor.passed - inventor.year;
 });
 
-console.log(totalAge);
+// console.log(totalAge);
 
 //optie2
 
@@ -133,7 +133,7 @@ const ageSorted = inventors
     return inventor; //alle methods zijn chainable, dus kan je in één keer uitvoeren
   });
 
-console.log(ageSorted);
+// console.log(ageSorted);
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -178,6 +178,49 @@ const data = [
   "truck",
 ];
 
+const dataCounted = data.reduce(
+  (acc, data) => {
+    switch (data) {
+      case "car":
+        acc.car++;
+        break;
+      case "walk":
+        acc.walk++;
+        break;
+      case "truck":
+        acc.truck++;
+        break;
+      case "bike":
+        acc.bike++;
+        break;
+      case "van":
+        acc.van++;
+        break;
+    }
+
+    return acc;
+  },
+  {
+    car: 0,
+    walk: 0,
+    truck: 0,
+    bike: 0,
+    van: 0,
+  }
+);
+
+//nog betere oplossing
+
+const itemsCOunt = data.reduce((acc, cv) => {
+  if (!acc[cv]) {
+    acc[(cv = 0)];
+  }
+  acc[cv] += 1;
+  return acc;
+}, {});
+
+// console.log(dataCounted)
+
 // ## Array Cardio Day 2
 
 const people2 = [
@@ -197,15 +240,43 @@ const comments = [
 
 // Some and Every Checks
 // Array.prototype.some() // is at least one person 19 or older?
+const olderThan19 = people2.some(({ year }) => {
+  return 2023 - year > 19;
+});
+console.log(olderThan19);
+
 // Array.prototype.every() // is everyone 19 or older?
+
+const everyoneOlder = people2.every(({ year }) => {
+  return 2023 - year > 19;
+});
+console.log(everyoneOlder);
 
 // Array.prototype.find()
 // Find is like filter, but instead returns just the one you are looking for
 // find the comment with the ID of 823423
 
+const foundComment = comments.find((comment) => {
+  return comment.id === 823423;
+});
+
+console.log(foundComment);
+
 // Array.prototype.findIndex()
 // Find the comment with this ID
+const foundCommentID = comments.findIndex((comment) => {
+  return comment.id === 823423;
+});
+
+console.log(foundCommentID);
+
 // delete the comment with the ID of 823423
+
+const withoutComment = comments.filter((comment) => {
+  return comment.id !== 823423;
+});
+
+console.log(withoutComment);
 
 //Use the .sort method without taking articles into account:
 const bands = [
@@ -245,4 +316,4 @@ const sortedBands = bands
     }
   });
 
-console.log(sortedBands);
+// console.log(sortedBands);

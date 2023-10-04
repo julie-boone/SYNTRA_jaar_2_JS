@@ -8,9 +8,13 @@ for (i = 0; i <= timeUl.length - 1; i++) {
   timeArray.push(timeUl[i].dataset.time);
 }
 
+//kan ook met array.from(), maar dan zet je wel de volledige elementen in een array,
+//en moet je in de map hierna de data eruithalen
+
 timeInDecimal = timeArray
   .map((cv) => {
     const minuteArray = cv.split(":");
+    console.log(minuteArray);
     const seconds = parseInt(minuteArray[1]);
     const minutes = parseInt(minuteArray[0] * 60);
     const decimalTime = minutes + seconds;
