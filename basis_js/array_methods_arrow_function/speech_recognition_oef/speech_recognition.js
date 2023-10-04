@@ -10,20 +10,26 @@ recognition.lang = "en-US";
 recognition.addEventListener("result", (e) => {
   if (e.results[0].isFinal) {
     let spoken = e.results[0][0].transcript;
-    const spokenArray = spoken.split(" ");
-    let spokenWithEmoji;
-    if (spokenArray.includes("sushi")) {
-      spokenWithEmoji = spokenArray.map((word) => {
-        let emoji = word;
-        if (word === "sushi") {
-          emoji = "🍣";
-        }
-        return emoji;
-      });
-    } else {
-      spokenWithEmoji = spokenArray;
-    }
-    let spokenTextWithEmoji = spokenWithEmoji.join(" ");
+
+    const reSushi = /sushi/;
+    const spokenTextWithEmoji = spoken.replace(reSushi, "🍣");
+
+    // const spokenArray = spoken.split(" ");
+    // let spokenWithEmoji;
+
+    // if (spokenArray.includes("sushi")) {
+    //   spokenWithEmoji = spokenArray.map((word) => {
+    //     let emoji = word;
+    //     if (word === "sushi") {
+    //       emoji = "🍣";
+    //     }
+    //     return emoji;
+    //   });
+    // } else {
+    //   spokenWithEmoji = spokenArray;
+    // }
+    // let spokenTextWithEmoji = spokenWithEmoji.join(" ");
+
     textField.innerHTML += `<p>${spokenTextWithEmoji}</p>`;
   }
 });

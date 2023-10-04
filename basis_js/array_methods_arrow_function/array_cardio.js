@@ -213,7 +213,7 @@ const dataCounted = data.reduce(
 
 const itemsCOunt = data.reduce((acc, cv) => {
   if (!acc[cv]) {
-    acc[(cv = 0)];
+    acc[cv] = 0;
   }
   acc[cv] += 1;
   return acc;
@@ -240,15 +240,16 @@ const comments = [
 
 // Some and Every Checks
 // Array.prototype.some() // is at least one person 19 or older?
+const thisYear = new Date().getFullYear();
+
 const olderThan19 = people2.some(({ year }) => {
-  return 2023 - year > 19;
+  return thisYear - year >= 19;
 });
 console.log(olderThan19);
 
 // Array.prototype.every() // is everyone 19 or older?
-
 const everyoneOlder = people2.every(({ year }) => {
-  return 2023 - year > 19;
+  return thisYear - year >= 19;
 });
 console.log(everyoneOlder);
 
@@ -277,6 +278,8 @@ const withoutComment = comments.filter((comment) => {
 });
 
 console.log(withoutComment);
+
+//of met een splice
 
 //Use the .sort method without taking articles into account:
 const bands = [
