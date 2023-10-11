@@ -72,10 +72,10 @@ function updateInsights() {
   tasksCompleted.innerText = completedTasks.length;
 
   const avgTaskLength = document.querySelector("#avgTaskLength");
-  const totalLength = tasks.reduce((acc, { name }) => acc + name.length);
+  const totalLength = tasks.reduce((acc, { name }) => acc + name.length, 0);
   console.log(totalLength);
   const avlength = totalLength / tasks.length;
-  avgTaskLength.innerText = avlength;
+  avgTaskLength.innerText = avlength.toFixed(2);
 }
 
 // problemen: avgtasklength werkt nog niet + nieuwe tasks zijn unchecked, oude automatisch checked
