@@ -11,8 +11,9 @@ recognition.addEventListener("result", (e) => {
   if (e.results[0].isFinal) {
     let spoken = e.results[0][0].transcript;
 
-    const reSushi = /sushi/;
-    const spokenTextWithEmoji = spoken.replace(reSushi, "🍣");
+    const spokenTextWithEmoji = spoken
+      .replace(/sushi|cold fish/gi, "🍣") //gi betekent global (dus over de hele tekst) en case insensitive, dus hoofdletters irrelevant
+      .replace(/skull/gi, "💀");
 
     // const spokenArray = spoken.split(" ");
     // let spokenWithEmoji;
@@ -35,6 +36,7 @@ recognition.addEventListener("result", (e) => {
 });
 
 recognition.addEventListener("end", recognition.start);
+//dient om de microfoon af te zetten als je het venster sluit
 
 recognition.start();
 

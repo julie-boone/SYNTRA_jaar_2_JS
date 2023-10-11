@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Task Manager</h1>
+
+    <!-- Add Task -->
+    <input type="text" id="taskInput" placeholder="Enter your task" />
+    <button onclick="addTask()">Add Task</button>
+
+    <!-- Task Filter -->
+    <select id="taskFilter" onchange="displayTasks()">
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+    </select>
+
+    <!-- Task List -->
+    <ul id="taskList"></ul>
+
+    <!-- Task Insights -->
+    <h3>Tasks Completed: <span id="completedCount">0</span></h3>
+    <h3>Average Task Length: <span id="avgTaskLength">0</span> characters</h3>
+    <script src="script.js"></script>
+</body>
+
+
+</html>
