@@ -78,4 +78,4 @@ function updateInsights() {
   avgTaskLength.innerText = avlength.toFixed(2);
 }
 
-// problemen: avgtasklength werkt nog niet + nieuwe tasks zijn unchecked, oude automatisch checked
+// probleem: nieuwe tasks zijn unchecked, oude automatisch checked
