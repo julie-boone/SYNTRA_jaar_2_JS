@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <style>
+        html {
+            height: 100%;
+        }
+
+        p {
+            color: white;
+            font-size: 2em;
+            font-weight: 200;
+            margin: 0;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background: rgb(255, 122, 113);
+            background: linear-gradient(180deg,
+                    rgba(255, 122, 113, 1) 0%,
+                    rgba(250, 152, 110, 1) 100%);
+        }
+
+        .answer {
+            display: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Emoji Picker</title>
+    <script src="script.js" delay></script>
+</head>
+
+<body>
+    <div class="container h-100">
+        <div class="row text-center align-items-center h-100">
+            <div class="mx-auto container">
+                <div class="grid" id="emojis"></div>
+                <button id="previous" class="btn btn-lg btn-outline-light">⬅</button>
+                <button id="next" class="btn btn-lg btn-outline-light">➡️</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
