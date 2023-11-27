@@ -1,0 +1,13 @@
+.grid_col_3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.temp, .wind {
+    font-size: 3.5rem;
+}
+
+.rain {
+    justify-content: center;
+}
+
