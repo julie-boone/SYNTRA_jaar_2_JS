@@ -1,7 +1,7 @@
 const ANSWER_LENGTH = 5;
 const ROUNDS = 6;
 const letters = document.querySelectorAll(".scoreboard-letter");
-const loadingDiv = document.querySelector(".info-bar");
+const loadingDiv = document.querySelector(".spiral");
 
 // the state for the app
 let currentGuess = "";
@@ -11,10 +11,10 @@ let keepGuessing = true;
 
 async function init() {
   // nab the word of the day
+  loadingDiv.classList.add("hidden");
   wordOTDay = await fetch("https://words.dev-apis.com/word-of-the-day")
     .then((res) => res.json())
     .then((res) => res.word);
-  console.log(wordOTDay);
 }
 
 // listening for event keys and routing to the right function
@@ -45,16 +45,32 @@ function addLetter(letter) {
 
 // use tries to enter a guess
 function commit() {
+  if (currentGuess.length < ANSWER_LENGTH) {
+    return;
+  }
+
+  checkWord(currentGuess).then((answer) => {
+    if (answer === false) {
+      alert("This word is not in our dictionary. Try again.");
+      return;
+    } else {
+      colorLetters();
+    }
+  });
+}
+
+function colorLetters() {
   const correctWord = Array.from(wordOTDay);
+  keepGuessing = false;
   const correctLetters = Array.from(currentGuess).map((letter, i) => {
     if (letter === correctWord[i]) {
+      correctWord[i] = "found";
       return "correct";
     } else {
       return letter;
     }
   });
   const resultsArray = correctLetters.map((letter) => {
-    keepGuessing = false;
     if (letter === "correct") {
       return "correct";
     } else if (correctWord.includes(letter)) {
@@ -69,22 +85,31 @@ function commit() {
   });
 
   for (let i = 0; i < resultsArray.length; i++) {
-    console.log("colored " + resultsArray[i]);
     letters[line * ANSWER_LENGTH + i].classList.add(resultsArray[i]);
   }
 
-  if (line < ROUNDS) {
+  if (!keepGuessing) {
+    const winningWord = document.querySelector("body");
+    winningWord.classList.add("winner");
+    const infoBar = document.querySelector(".info-bar");
+    const winner = document.createElement("p");
+    winner.innerText = `Congratulations! You found the word of the day: ${wordOTDay.toUpperCase()}.`;
+    infoBar.appendChild(winner);
+
+    return;
+  }
+
+  if (line < ROUNDS - 1) {
     line++;
   } else {
     keepGuessing = false;
+    const infoBar = document.querySelector(".info-bar");
+    const loser = document.createElement("p");
+    loser.innerText = `No more turns! The word you are looking for is ${wordOTDay.toUpperCase()}.`;
+    infoBar.appendChild(loser);
   }
 
   currentGuess = "";
-
-  // const res = await fetch("https://words.dev-apis.com/validate-word", {
-  //   method: "POST",
-  //   body: JSON.stringify({ word: currentGuess }),
-  // });
 }
 
 // user hits backspace, if the the length of the string is 0 then do
@@ -94,13 +119,7 @@ function backspace() {
   letters[line * ANSWER_LENGTH + currentGuess.length].innerText = "";
 }
 
-// let the user know that their guess wasn't a real word
-// skip this if you're not doing guess validation
-function markInvalidWord() {}
-
 // a little function to check to see if a character is alphabet letter
-// this uses regex (the /[a-zA-Z]/ part) but don't worry about it
-// you can learn that later and don't need it too frequently
 function isLetter(letter) {
   re = /^[a-zA-Z]$/;
   if (re.test(letter)) {
@@ -110,9 +129,14 @@ function isLetter(letter) {
   }
 }
 
-// show the loading spinner when needed
-function setLoading(isLoading) {
-  //loadingDiv.classList.toggle("hidden", !isLoading);
+async function checkWord(currentGuess) {
+  loadingDiv.classList.remove("hidden");
+  const res = await fetch("https://words.dev-apis.com/validate-word", {
+    method: "POST",
+    body: JSON.stringify({ word: currentGuess }),
+  }).then((res) => res.json());
+  loadingDiv.classList.add("hidden");
+  return res.validWord;
 }
 
 init();
